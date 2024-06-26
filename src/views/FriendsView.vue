@@ -1,53 +1,53 @@
-<template>
-    <div>
+<template lang="html">
+    <div class="card">
       <div v-if="loading" class="spinner">Loading...</div>
-      <div v-else>
-        <CardComp
-          v-for="friend in friends" :key="friend.id" :gender="friend.gender" >
-          <template #header>
-            <h3>{{ friend.firstName }}</h3>
-          </template>
-          <p>Phone: {{ friend.contactDetails }}</p>
-          <p>Email: {{ friend.email }}</p>
-        </CardComp>
+      <div v-for="friend in $store.state.friends" :key="friend.id" class="friend-card" :style="{ 'border': friend.gender === 'ale' || friend.gender === 'Male' || friend.gender === 'MALE'? '2px solid gold' : '2px solid green' }">
+      {{ friend.id }} <br> {{ friend.firstName }} {{ friend.lastName }} <br>
+       {{ friend.gender }} <br> {{ friend.contactDetails }}  {{ friend.profile }}
       </div>
-    </div>
+      <card-comp v-for="friend in getCars()" :key="friend.id">
+        <template #friend-card>
+          {{ friend }}
+        </template>
+      </card-comp>
+      </div>
   </template>
   
   <script>
-  import CardComp from '@/components/CardComp.vue';
-  
+  import CardComp from "../components/CardComp.vue";
   export default {
-    components: { CardComp },
-    data() {
-      return {
-        loading: true,
-        "friends":[
-        {
-            "id":"1",
-            "firstName":"",
-            "lastName":"",
-            "gender":"",
-            "profile":"",
-            "contactDetails":""
-        }
-    ]
-      }
+    methods: {
+      getCars() {
+        return this.$store.state.friends;
+      },
+      getData() {
+        return this.$store.dispatch("getData");
+      },
     },
     mounted() {
-      setTimeout(() => {
-        this.friends = [
-          { id: 1, name: 'Nikilitha Kakaza', contactDetails: '082 402 1820', email: 'kakazanikilitha544@gmail.com', gender: 'female' },
-          { id: 2, name: 'Jane Do', contactDetails: '', email: '@gmail.com', gender: 'female' }
-        ];
-        this.loading = false;
-      }, 2000);
-    }
-  }
+      this.getData();
+    },
+    components: {
+      CardComp,
+    },
+  };
   </script>
-  
+
   <style scoped>
-  .spinner {
-    text-align: center;
+  .friend-card {
+    padding: 5vh;
+    border-radius: 20px;
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+    line-height: 2.5;
+    vertical-align: top;
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+  .card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
   </style>

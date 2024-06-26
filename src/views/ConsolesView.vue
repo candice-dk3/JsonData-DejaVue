@@ -1,6 +1,6 @@
 <template>
-    <div>
-      <CardComp v-for="gaming_consoles in gaming_consoles" :key="gaming_consoles.id">
+    <div class="gc">
+      <CardComp v-for="gaming_consoles in gaming_consoles" :key="gaming_consoles.id" class="console">
         <template #header>
           <h3>{{ gaming_consoles.name }}</h3>
         </template>
@@ -68,5 +68,23 @@
   </script>
 
 <style scoped> 
-
+    
+    .console{
+    display: grid;
+    border-radius: 30px;
+    width: 300px;
+    height: 480px;
+    margin: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    line-height: 2.5;
+    vertical-align: top;
+    border: 4px solid  pink;
+    background-color: burlywood;
+    }
+    .gc{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    }
 </style>

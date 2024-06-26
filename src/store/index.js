@@ -21,7 +21,7 @@ export default createStore({
   },
   actions: {
     async getData({commit}){
-      let fetchedData = await fetch('https://nikilitha26.github.io/dejavue.json/data.json')
+      let fetchedData = await fetch('https://candice-dk3.github.io/JsonData-DejaVue/data/data.json')
       let data = await fetchedData.json()
       let {cars, friends, gaming_consoles} = data
       commit('setCars', cars)
